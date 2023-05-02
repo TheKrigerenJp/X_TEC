@@ -1,0 +1,91 @@
+import java.util.NoSuchElementException;
+
+public class Cola {
+    private Nodo inicio, fin;
+
+    private class Nodo {
+        int valor;
+        Nodo siguiente;
+
+        public Nodo(int valor) {
+            this.valor = valor;
+            siguiente = null;
+        }
+    }
+
+    public Cola() {
+        inicio = null;
+        fin = null;
+    }
+
+    public boolean estaVacia() {
+        return inicio == null;
+    }
+
+    public void encolar(int valor) {
+        Nodo nuevoNodo = new Nodo(valor);
+
+        if (estaVacia()) {
+            inicio = nuevoNodo;
+            fin = nuevoNodo;
+        } else {
+            fin.siguiente = nuevoNodo;
+            fin = nuevoNodo;
+        }
+    }
+
+    public int desencolar() {
+        if (estaVacia()) {
+            throw new NoSuchElementException("La cola está vacía");
+        }
+        int valorDesencolado = inicio.valor;
+        inicio = inicio.siguiente;
+        if (inicio == null) {
+            fin = null;
+        }
+        return valorDesencolado;
+    }
+
+    public int longitud() {
+        int longitud = 0;
+        Nodo actual = inicio;
+
+        while (actual != null) {
+            longitud++;
+            actual = actual.siguiente;
+        }
+
+        return longitud;
+    }
+
+    public void vaciar() {
+        inicio = null;
+        fin = null;
+    }
+
+    public int primero() {
+        if (estaVacia()) {
+            throw new NoSuchElementException("La cola está vacía");
+        }
+
+        return inicio.valor;
+    }
+
+    public void imprimir() {
+        if (estaVacia()) {
+            System.out.println("La cola está vacía");
+            return;
+        }
+
+        Nodo actual = inicio;
+
+        while (actual != null) {
+            System.out.print(actual.valor + " ");
+            actual = actual.siguiente;
+        }
+
+        System.out.println();
+    }
+
+
+}
