@@ -1,91 +1,118 @@
+package com.example.demoproyecto2;
+
 import java.util.NoSuchElementException;
 
+/**
+ * Clase cola
+ * @author JJD
+ * @version 15/05/2023
+ */
 public class Cola {
-    private Nodo inicio, fin;
+        private Nodo inicio, fin;
 
-    private class Nodo {
-        int valor;
-        Nodo siguiente;
+        private class Nodo {
+            int valor;
+            Nodo siguiente;
 
-        public Nodo(int valor) {
-            this.valor = valor;
-            siguiente = null;
+            public Nodo(int valor) {
+                this.valor = valor;
+                siguiente = null;
+            }
         }
-    }
 
-    public Cola() {
-        inicio = null;
-        fin = null;
-    }
-
-    public boolean estaVacia() {
-        return inicio == null;
-    }
-
-    public void encolar(int valor) {
-        Nodo nuevoNodo = new Nodo(valor);
-
-        if (estaVacia()) {
-            inicio = nuevoNodo;
-            fin = nuevoNodo;
-        } else {
-            fin.siguiente = nuevoNodo;
-            fin = nuevoNodo;
-        }
-    }
-
-    public int desencolar() {
-        if (estaVacia()) {
-            throw new NoSuchElementException("La cola está vacía");
-        }
-        int valorDesencolado = inicio.valor;
-        inicio = inicio.siguiente;
-        if (inicio == null) {
+        public Cola() {
+            inicio = null;
             fin = null;
         }
-        return valorDesencolado;
-    }
 
-    public int longitud() {
-        int longitud = 0;
-        Nodo actual = inicio;
-
-        while (actual != null) {
-            longitud++;
-            actual = actual.siguiente;
+    /**
+     * Metodo que verifica si la cola esta vacia
+     * @return Si es true retorna que el inicio de la cola es null
+     */
+        public boolean estaVacia() {
+            return inicio == null;
         }
 
-        return longitud;
-    }
+    /**
+     * Metodo para enviar a la cola un valor, como bien se sabe este será enviado al final
+     * @param valor este parametro es que el que será agregado a la cola
+     */
+        public void encolar(int valor) {
+            Nodo nuevoNodo = new Nodo(valor);
 
+            if (estaVacia()) {
+                inicio = nuevoNodo;
+                fin = nuevoNodo;
+            } else {
+                fin.siguiente = nuevoNodo;
+                fin = nuevoNodo;
+            }
+        }
+
+    /**
+     * Metodo para eliminar un valor de la cola
+     * @return Un valor entero el cual fue desencolado
+     */
+        public int desencolar() {
+            if (estaVacia()) {
+                throw new NoSuchElementException("La cola está vacía");
+            }
+            int valorDesencolado = inicio.valor;
+            inicio = inicio.siguiente;
+            if (inicio == null) {
+                fin = null;
+            }
+            return valorDesencolado;
+        }
+
+    /**
+     * Metodo para averiguar la longitud de la cola
+     * @return el valor numerico de la longitud
+     */
+        public int longitud() {
+            int longitud = 0;
+            Nodo actual = inicio;
+
+            while (actual != null) {
+                longitud++;
+                actual = actual.siguiente;
+            }
+
+            return longitud;
+        }
+
+    /**
+     * Metodo para vaciar la cola, le decimos a la cola que al inicio y al final apunte a null
+     */
     public void vaciar() {
-        inicio = null;
-        fin = null;
-    }
-
-    public int primero() {
-        if (estaVacia()) {
-            throw new NoSuchElementException("La cola está vacía");
+            inicio = null;
+            fin = null;
         }
 
-        return inicio.valor;
-    }
+        public int primero() {
+            if (estaVacia()) {
+                throw new NoSuchElementException("La cola está vacía");
+            }
 
-    public void imprimir() {
-        if (estaVacia()) {
-            System.out.println("La cola está vacía");
-            return;
+            return inicio.valor;
         }
 
-        Nodo actual = inicio;
+        public void imprimir() {
+            if (estaVacia()) {
+                System.out.println("La cola está vacía");
+                return;
+            }
 
-        while (actual != null) {
-            System.out.print(actual.valor + " ");
-            actual = actual.siguiente;
+            Nodo actual = inicio;
+
+            while (actual != null) {
+                System.out.print(actual.valor + " ");
+                actual = actual.siguiente;
+            }
+
+            System.out.println();
         }
 
-        System.out.println();
+
     }
 
-
-}
