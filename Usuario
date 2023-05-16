@@ -1,0 +1,47 @@
+ public class Usuario {
+    private String Nombre;
+    private int usuario;
+    private int password;
+    private int id;
+    public Usuario(String Nombre, int id, int usuario, int password) {
+        this.Nombre = Nombre;
+        this.usuario = usuario;
+        this.password = password;
+        this.id = id;
+    }
+
+
+    public int getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(int usuario) {
+        this.usuario = usuario;
+    }
+
+    public int getPassword() {
+        return password;
+    }
+
+    public void setPassword(int password) {
+        this.password = password;
+    }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String nombre) {
+        Nombre = nombre;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
+}
