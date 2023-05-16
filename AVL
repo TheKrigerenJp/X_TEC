@@ -1,3 +1,11 @@
+package com.example.demoproyecto2;
+
+/**
+ * Clase arbol AVL
+ * @param <T> Valor cualquiera que se utilizará para hacer comparaciones
+ * @author JJD
+ * @version 13/05/2023
+ */
 public class AVL<T extends Comparable<T>> {
 
     private class Node {
@@ -14,18 +22,37 @@ public class AVL<T extends Comparable<T>> {
 
     private Node root;
 
+    /**
+     * Nos da la altura del nodo
+     * @param node nodo el cual averiguaremos el su altura
+     * @return nulo si es 0 o un valor numerico si no esta vacía
+     */
     private int height(Node node) {
         return node == null ? 0 : node.height;
     }
 
+    /**
+     * Metodo para balancear un nodo
+     * @param node nodo que recibimos para balancear
+     * @return Nulo o la altura del hijo izquierdo menos la del derecho
+     */
     private int balance(Node node) {
         return node == null ? 0 : height(node.left) - height(node.right);
     }
 
+    /**
+     * Metodo con el que actualizamos una altura despues de una rotación
+     * @param node tipo nodo que recibimos para balancear
+     */
     private void updateHeight(Node node) {
         node.height = 1 + Math.max(height(node.left), height(node.right));
     }
 
+    /**
+     * Metodo para hacer las rotaciones que son hacía la derecha
+     * @param y nodo con el que nos guiaremos para hacer las rotaciones
+     * @return el nodo llamado x es el que pondremos en la posición de y
+     */
     private Node rotateRight(Node y) {
         Node x = y.left;
         Node t2 = x.right;
@@ -36,6 +63,11 @@ public class AVL<T extends Comparable<T>> {
         return x;
     }
 
+    /**
+     * Metodo para hacer las rotaciones que son hacía la izquierda
+     * @param x nodo con el que nos guiaremos para hacer las rotaciones
+     * @return el nodo llamado y es el que pondremos en la posición de x
+     */
     private Node rotateLeft(Node x) {
         Node y = x.right;
         Node t2 = y.left;
@@ -46,10 +78,20 @@ public class AVL<T extends Comparable<T>> {
         return y;
     }
 
+    /**
+     *
+     * @param value
+     */
     public void insert(T value) {
         root = insert(root, value);
     }
 
+    /**
+     * Metodo para insertar nodos en el arbol AVL
+     * @param node parametro de tipo nodo el cual es el que queremos agregar
+     * @param value metodo tipo T para hacer comparaciones
+     * @return el nodo agregado
+     */
     private Node insert(Node node, T value) {
         if (node == null) {
             return new Node(value);
@@ -82,6 +124,12 @@ public class AVL<T extends Comparable<T>> {
         root = delete(root, value);
     }
 
+    /**
+     * Metodo para eliminar nodos del arbol
+     * @param node nodo que recibimos para eliminarlo
+     * @param value parametro de tipo T (cualquier valor comparable)
+     * @return el valor del nodo a eliminar
+     */
     private Node delete(Node node, T value) {
         if (node == null) {
             return null;
@@ -121,6 +169,11 @@ public class AVL<T extends Comparable<T>> {
         return node;
     }
 
+    /**
+     * Obtener el valor mas pequeño
+     * @param node Tipo nodo para comparar
+     * @return el current que llegará hasta el ultimo
+     */
     private Node minValueNode(Node node) {
         Node current = node;
         while (current.left != null) {
@@ -141,6 +194,10 @@ public class AVL<T extends Comparable<T>> {
         }
     }
 
+    /**
+     * Metodo para obtener el valor de la raiz
+     * @return valor de la raiz de ese momento
+     */
     public T getRootValue() {
         if (root == null) {
             return null;
@@ -148,6 +205,10 @@ public class AVL<T extends Comparable<T>> {
         return root.value;
     }
 
+    /**
+     * Metodo para obtener el valor minimo
+     * @return El valor que tenga el current en ese momento
+     */
     public T getMinValue() {
         if (root == null) {
             return null;
@@ -159,6 +220,10 @@ public class AVL<T extends Comparable<T>> {
         return current.value;
     }
 
+    /**
+     * Metodo para obtener el valor maximo
+     * @return El valor que tenga el current en ese momento
+     */
     public T getMaxValue() {
         if (root == null) {
             return null;
@@ -171,4 +236,5 @@ public class AVL<T extends Comparable<T>> {
     }
 
 }
+
 
