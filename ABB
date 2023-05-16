@@ -1,6 +1,10 @@
-public class Arbol {
-}
+package com.example.demoproyecto2;
 
+/**
+ * Clase Nodo
+ * @author JJD
+ * @version 13/05/2023
+ */
 class Nodo {
     int valor;
     Nodo izquierdo, derecho;
@@ -12,17 +16,33 @@ class Nodo {
     }
 }
 
+/**
+ * Clase ArbolBinarioBusqueda
+ * @author JJD
+ * @version 13/05/2023
+ */
 class ArbolBinarioBusqueda {
     Nodo raiz;
+
 
     public ArbolBinarioBusqueda() {
         raiz = null;
     }
 
+    /**
+     * Metodo para insertar un valor en el arbol binario, llama a otro metodo el cual tiene la logica para saber donde colocar el valor
+     * @param valor Un valor entero el cual es agregado al arbol
+     */
     public void insertar(int valor) {
         raiz = insertarRec(raiz, valor);
     }
 
+    /**
+     * Metodo Este metodo tiene la logica utilizada para hacer la inserción de valores dentro del arbol, verifica si el arbol  esta vacio, si ya hay raiz entonces nada mas verifica si el valor ingresado es menor o mayor que esta misma
+     * @param raiz Parametro que utlizaremos como un nodo raiz
+     * @param valor Este entero sera la key que posicionaremos dependiendo de la verificación anterior
+     * @return Retornamos la raíz de nuestro arbol
+     */
     Nodo insertarRec(Nodo raiz, int valor) {
         if (raiz == null) {
             raiz = new Nodo(valor);
@@ -37,6 +57,10 @@ class ArbolBinarioBusqueda {
         return raiz;
     }
 
+    /**
+     * Metodo que utilizaremos para la impresión del orden de nuestro arbol, orden izquierdo luego derecho
+     * @param nodo recibimos un Nodo como parametro
+     */
     public void imprimirOrden(Nodo nodo) {
         if (nodo != null) {
             imprimirOrden(nodo.izquierdo);
@@ -59,3 +83,4 @@ class ArbolBinarioBusqueda {
         arbol.imprimirOrden(arbol.raiz);
     }
 }
+
