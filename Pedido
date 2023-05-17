@@ -1,0 +1,9 @@
+package com.example.demoproyecto2;
+
+public class Pedido {
+    private int tiempoTotal, tiempoRestante, cantidadPlatos;
+    private String usuario;
+    private Lista ListaPlatos;
+
+
+}
