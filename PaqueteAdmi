@@ -1,0 +1,96 @@
+[23:21, 16/5/2023] Jair CE: package com.example.demoproyecto2;
+
+import java.io.Serializable;
+
+public class PaqueteAdmi implements Serializable {
+
+    private String usuario;
+    private String password;
+    private String usuarionew;
+    private String passwordnew;
+    private String accion;
+    private int id;
+
+
+    public String getUsuario() {
+        return usuario;
+    }
+    public void setUsuario(String nick) {
+        this.usuario = nick;
+    }
+    public String getPassword() {
+        return password;
+    }
+
+    public String getUsuarionew() {
+        return usuarionew;
+    }
+
+    public void setUsuarionew(String usuarionew) {
+        this.usuarionew = usuarionew;
+    }
+
+    public String getPasswordnew() {
+        return passwordnew;
+    }
+
+    public void setPasswordnew(String…
+[23:21, 16/5/2023] Jair CE: package com.example.demoproyecto2;
+
+import java.io.Serializable;
+
+public class PaqueteUsuario implements Serializable {
+
+    private String usuario;
+    private String password;
+    private String usuarionew;
+    private String passwordnew;
+    private String accion;
+    private int id;
+
+
+    public String getUsuario() {
+        return usuario;
+    }
+    public void setUsuario(String nick) {
+        this.usuario = nick;
+    }
+    public String getPassword() {
+        return password;
+    }
+
+    public String getUsuarionew() {
+        return usuarionew;
+    }
+
+    public void setUsuarionew(String usuarionew) {
+        this.usuarionew = usuarionew;
+    }
+
+    public String getPasswordnew() {
+        return passwordnew;
+    }
+
+    public void setPasswordnew(String passwordnew) {
+        this.passwordnew = passwordnew;
+    }
+
+    public void setPassword(String ip) {
+        this.password = ip;
+    }
+    public String getAccion() {
+        return accion;
+    }
+    public void setAccion(String accion) {
+        this.accion = accion;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+}
