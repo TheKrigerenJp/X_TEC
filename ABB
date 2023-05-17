@@ -1,86 +1,161 @@
 package com.example.demoproyecto2;
 
-/**
- * Clase Nodo
- * @author JJD
- * @version 13/05/2023
- */
-class Nodo {
-    int valor;
-    Nodo izquierdo, derecho;
+public class ABBU {
+    private NodoArbol raiz;
 
-    public Nodo(int valor) {
-        this.valor = valor;
-        izquierdo = null;
-        derecho = null;
-    }
-}
-
-/**
- * Clase ArbolBinarioBusqueda
- * @author JJD
- * @version 13/05/2023
- */
-class ArbolBinarioBusqueda {
-    Nodo raiz;
-
-
-    public ArbolBinarioBusqueda() {
-        raiz = null;
-    }
-
-    /**
-     * Metodo para insertar un valor en el arbol binario, llama a otro metodo el cual tiene la logica para saber donde colocar el valor
-     * @param valor Un valor entero el cual es agregado al arbol
-     */
-    public void insertar(int valor) {
-        raiz = insertarRec(raiz, valor);
-    }
-
-    /**
-     * Metodo Este metodo tiene la logica utilizada para hacer la inserción de valores dentro del arbol, verifica si el arbol  esta vacio, si ya hay raiz entonces nada mas verifica si el valor ingresado es menor o mayor que esta misma
-     * @param raiz Parametro que utlizaremos como un nodo raiz
-     * @param valor Este entero sera la key que posicionaremos dependiendo de la verificación anterior
-     * @return Retornamos la raíz de nuestro arbol
-     */
-    Nodo insertarRec(Nodo raiz, int valor) {
-        if (raiz == null) {
-            raiz = new Nodo(valor);
-            return raiz;
-        }
-
-        if (valor < raiz.valor)
-            raiz.izquierdo = insertarRec(raiz.izquierdo, valor);
-        else if (valor > raiz.valor)
-            raiz.derecho = insertarRec(raiz.derecho, valor);
-
+    public NodoArbol getRaiz() {
         return raiz;
     }
 
-    /**
-     * Metodo que utilizaremos para la impresión del orden de nuestro arbol, orden izquierdo luego derecho
-     * @param nodo recibimos un Nodo como parametro
-     */
-    public void imprimirOrden(Nodo nodo) {
-        if (nodo != null) {
-            imprimirOrden(nodo.izquierdo);
-            System.out.print(nodo.valor + " ");
-            imprimirOrden(nodo.derecho);
+    public void setRaiz(NodoArbol raiz) {
+        this.raiz = raiz;
+    }
+
+    public class NodoArbol {
+        private Usuario usuario;
+
+        public NodoArbol getIzquierdo() {
+            return izquierdo;
+        }
+
+        public void setIzquierdo(NodoArbol izquierdo) {
+            this.izquierdo = izquierdo;
+        }
+
+        public NodoArbol getDerecho() {
+            return derecho;
+        }
+
+        public void setDerecho(NodoArbol derecho) {
+            this.derecho = derecho;
+        }
+
+        public Usuario getUsuario() {
+            return usuario;
+        }
+
+        public void setUsuario(Usuario usuario) {
+            this.usuario = usuario;
+        }
+
+        private NodoArbol izquierdo;
+        private NodoArbol derecho;
+
+        public NodoArbol(Usuario usuario) {
+            this.usuario = usuario;
+            this.izquierdo = null;
+            this.derecho = null;
         }
     }
 
-    public static void main(String[] args) {
-        ArbolBinarioBusqueda arbol = new ArbolBinarioBusqueda();
-
-        arbol.insertar(50);
-        arbol.insertar(30);
-        arbol.insertar(20);
-        arbol.insertar(40);
-        arbol.insertar(70);
-        arbol.insertar(60);
-        arbol.insertar(80);
-
-        arbol.imprimirOrden(arbol.raiz);
+    public ABBU() {
+        this.raiz = null;
     }
+
+    public void insertar(Usuario usuario) {
+        raiz = insertarNodo(raiz, usuario);
+    }
+
+    private NodoArbol insertarNodo(NodoArbol nodo, Usuario usuario) {
+        if (nodo == null) {
+            return new NodoArbol(usuario);
+        }
+
+        if (usuario.getId() < nodo.usuario.getId()) {
+            nodo.izquierdo = insertarNodo(nodo.izquierdo, usuario);
+        } else if (usuario.getId() > nodo.usuario.getId()) {
+            nodo.derecho = insertarNodo(nodo.derecho, usuario);
+        }
+
+        return nodo;
+    }
+
+    public boolean buscar(int id) {
+        return buscarNodo(raiz, id);
+    }
+
+    private boolean buscarNodo(NodoArbol nodo, int id) {
+        if (nodo == null) {
+            return false;
+        }
+
+        if (nodo.usuario.getId() == id) {
+            return true;
+        } else if (id < nodo.usuario.getId()) {
+            return buscarNodo(nodo.izquierdo, id);
+        } else {
+            return buscarNodo(nodo.derecho, id);
+        }
+    }
+
+    public Usuario get(String nombreUsuario) {
+        return getUsuarioPorNombre(raiz, nombreUsuario);
+    }
+
+    private Usuario getUsuarioPorNombre(NodoArbol nodo, String nombreUsuario) {
+        if (nodo == null) {
+            return null;
+        }
+
+        int comparacion = nombreUsuario.compareTo(nodo.usuario.getUsuario());
+        if (comparacion == 0) {
+            return nodo.usuario;
+        } else if (comparacion < 0) {
+            return getUsuarioPorNombre(nodo.izquierdo, nombreUsuario);
+        } else {
+            return getUsuarioPorNombre(nodo.derecho, nombreUsuario);
+        }
+    }
+
+
+
+    public boolean delete(int id) {
+        if (buscar(id)) {
+            raiz = deleteNodo(raiz, id);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private NodoArbol deleteNodo(NodoArbol nodo, int id) {
+        if (nodo == null) {
+            return null;
+        }
+
+        if (id < nodo.usuario.getId()) {
+            nodo.izquierdo = deleteNodo(nodo.izquierdo, id);
+        } else if (id > nodo.usuario.getId()) {
+            nodo.derecho = deleteNodo(nodo.derecho, id);
+        } else {
+            if (nodo.izquierdo == null && nodo.derecho == null) {
+                // Caso 1: Nodo sin hijos
+                return null;
+            } else if (nodo.izquierdo == null) {
+                // Caso 2: Nodo con un solo hijo (hijo derecho)
+                return nodo.derecho;
+            } else if (nodo.derecho == null) {
+                // Caso 2: Nodo con un solo hijo (hijo izquierdo)
+                return nodo.izquierdo;
+            } else {
+                // Caso 3: Nodo con dos hijos
+                NodoArbol sucesor = encontrarSucesor(nodo.derecho);
+                nodo.usuario = sucesor.usuario;
+                nodo.derecho = deleteNodo(nodo.derecho, sucesor.usuario.getId());
+            }
+        }
+
+        return nodo;
+    }
+
+    private NodoArbol encontrarSucesor(NodoArbol nodo) {
+        if (nodo.izquierdo == null) {
+            return nodo;
+        }
+
+        return encontrarSucesor(nodo.izquierdo);
+    }
+
 }
+
 
